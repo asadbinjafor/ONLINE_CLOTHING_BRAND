@@ -118,3 +118,16 @@ INSERT INTO products (name, description, size_chart, price, category_id, stock, 
 SELECT 'High Waist Jeans', 'Stylish high waist jeans', '26,28,30,32,34', 2200.00, c.id, 35, 'Women', ''
 FROM categories c WHERE c.name = 'Jeans'
 AND NOT EXISTS (SELECT 1 FROM products WHERE name = 'High Waist Jeans');
+
+-- Demo accounts (password for both: Admin@12345)
+INSERT INTO users (name, email, password_hash, role, address, phone, profile_picture)
+SELECT 'Site Admin', 'admin@adore.local',
+       '$2y$12$hFElozMNtN4JbgTMvEfrYe7Bmedlh3MGwYDHxsjSXLqQiOuvstA3u',
+       'admin', '1 Admin Street, Dhaka', '01700000001', ''
+WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'admin@adore.local');
+
+INSERT INTO users (name, email, password_hash, role, address, phone, profile_picture)
+SELECT 'Jamie Shopper', 'customer@adore.local',
+       '$2y$12$hFElozMNtN4JbgTMvEfrYe7Bmedlh3MGwYDHxsjSXLqQiOuvstA3u',
+       'customer', '22 Customer Road, Dhaka', '01700000002', ''
+WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'customer@adore.local');
